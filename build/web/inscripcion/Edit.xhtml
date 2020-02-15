@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditInscripcionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditInscripcionLabel_idinscripcion}" for="idinscripcion" />
+                    <h:inputText id="idinscripcion" value="#{inscripcionController.selected.idinscripcion}" title="#{bundle.EditInscripcionTitle_idinscripcion}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_idinscripcion}"/>
+                    <h:outputLabel value="#{bundle.EditInscripcionLabel_fechaInscripcion}" for="fechaInscripcion" />
+                    <h:inputText id="fechaInscripcion" value="#{inscripcionController.selected.fechaInscripcion}" title="#{bundle.EditInscripcionTitle_fechaInscripcion}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_fechaInscripcion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditInscripcionLabel_alumnonumerocarne}" for="alumnonumerocarne" />
+                    <h:selectOneMenu id="alumnonumerocarne" value="#{inscripcionController.selected.alumnonumerocarne}" title="#{bundle.EditInscripcionTitle_alumnonumerocarne}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_alumnonumerocarne}">
+                        <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{inscripcionController.update}" value="#{bundle.EditInscripcionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditInscripcionViewLink}"/>
+                <br />
+                <h:commandLink action="#{inscripcionController.prepareList}" value="#{bundle.EditInscripcionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditInscripcionIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

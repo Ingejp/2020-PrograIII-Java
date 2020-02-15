@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAsignacionCursoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAsignacionCursoLabel_idasignacionCurso}" for="idasignacionCurso" />
+                    <h:inputText id="idasignacionCurso" value="#{asignacionCursoController.selected.idasignacionCurso}" title="#{bundle.CreateAsignacionCursoTitle_idasignacionCurso}" required="true" requiredMessage="#{bundle.CreateAsignacionCursoRequiredMessage_idasignacionCurso}"/>
+                    <h:outputLabel value="#{bundle.CreateAsignacionCursoLabel_cursoCodigoCurso}" for="cursoCodigoCurso" />
+                    <h:selectOneMenu id="cursoCodigoCurso" value="#{asignacionCursoController.selected.cursoCodigoCurso}" title="#{bundle.CreateAsignacionCursoTitle_cursoCodigoCurso}" required="true" requiredMessage="#{bundle.CreateAsignacionCursoRequiredMessage_cursoCodigoCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAsignacionCursoLabel_inscripcionIdinscripcion}" for="inscripcionIdinscripcion" />
+                    <h:selectOneMenu id="inscripcionIdinscripcion" value="#{asignacionCursoController.selected.inscripcionIdinscripcion}" title="#{bundle.CreateAsignacionCursoTitle_inscripcionIdinscripcion}" required="true" requiredMessage="#{bundle.CreateAsignacionCursoRequiredMessage_inscripcionIdinscripcion}">
+                        <f:selectItems value="#{inscripcionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{asignacionCursoController.create}" value="#{bundle.CreateAsignacionCursoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{asignacionCursoController.prepareList}" value="#{bundle.CreateAsignacionCursoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAsignacionCursoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
