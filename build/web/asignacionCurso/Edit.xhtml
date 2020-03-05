@@ -3,40 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.EditAsignacionCursoTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditAsignacionCursoLabel_idasignacionCurso}" for="idasignacionCurso" />
-                    <h:inputText id="idasignacionCurso" value="#{asignacionCursoController.selected.idasignacionCurso}" title="#{bundle.EditAsignacionCursoTitle_idasignacionCurso}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_idasignacionCurso}"/>
-                    <h:outputLabel value="#{bundle.EditAsignacionCursoLabel_cursoCodigoCurso}" for="cursoCodigoCurso" />
-                    <h:selectOneMenu id="cursoCodigoCurso" value="#{asignacionCursoController.selected.cursoCodigoCurso}" title="#{bundle.EditAsignacionCursoTitle_cursoCodigoCurso}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_cursoCodigoCurso}">
-                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditAsignacionCursoLabel_inscripcionIdinscripcion}" for="inscripcionIdinscripcion" />
-                    <h:selectOneMenu id="inscripcionIdinscripcion" value="#{asignacionCursoController.selected.inscripcionIdinscripcion}" title="#{bundle.EditAsignacionCursoTitle_inscripcionIdinscripcion}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_inscripcionIdinscripcion}">
-                        <f:selectItems value="#{inscripcionController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{asignacionCursoController.update}" value="#{bundle.EditAsignacionCursoSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditAsignacionCursoViewLink}"/>
-                <br />
-                <h:commandLink action="#{asignacionCursoController.prepareList}" value="#{bundle.EditAsignacionCursoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditAsignacionCursoIndexLink}" />
+    <ui:composition>
+
+        <p:dialog id="AsignacionCursoEditDlg" widgetVar="AsignacionCursoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignacionCursoTitle}">
+            <h:form id="AsignacionCursoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionCursoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAsignacionCursoLabel_idasignacionCurso}" for="idasignacionCurso" />
+                        <p:inputText id="idasignacionCurso" value="#{asignacionCursoController.selected.idasignacionCurso}" title="#{bundle.EditAsignacionCursoTitle_idasignacionCurso}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_idasignacionCurso}"/>
+                        <p:outputLabel value="#{bundle.EditAsignacionCursoLabel_cursoCodigoCurso}" for="cursoCodigoCurso" />
+                        <p:selectOneMenu id="cursoCodigoCurso" value="#{asignacionCursoController.selected.cursoCodigoCurso}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_cursoCodigoCurso}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"
+                                           var="cursoCodigoCursoItem"
+                                           itemValue="#{cursoCodigoCursoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAsignacionCursoLabel_inscripcionIdinscripcion}" for="inscripcionIdinscripcion" />
+                        <p:selectOneMenu id="inscripcionIdinscripcion" value="#{asignacionCursoController.selected.inscripcionIdinscripcion}" required="true" requiredMessage="#{bundle.EditAsignacionCursoRequiredMessage_inscripcionIdinscripcion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{inscripcionController.itemsAvailableSelectOne}"
+                                           var="inscripcionIdinscripcionItem"
+                                           itemValue="#{inscripcionIdinscripcionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignacionCursoController.update}" value="#{bundle.Save}" update="display,:AsignacionCursoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsignacionCursoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignacionCursoEditDialog.hide()"/>
+                </h:panelGroup>
             </h:form>
-        </ui:define>
-    </ui:composition>
+        </p:dialog>
 
+    </ui:composition>
 </html>

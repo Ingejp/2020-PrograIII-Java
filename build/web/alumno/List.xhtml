@@ -3,83 +3,94 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
+    <ui:composition template="/Plantilla/Plantilla.xhtml">
+    <!--   <ui:composition template="/template.xhtml">-->
+
+
+       <!-- <ui:define name="title">
             <h:outputText value="#{bundle.ListAlumnoTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListAlumnoEmpty}" rendered="#{alumnoController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{alumnoController.items.rowCount > 0}">
-                    <h:outputText value="#{alumnoController.pagination.pageFirstItem + 1}..#{alumnoController.pagination.pageLastItem + 1}/#{alumnoController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{alumnoController.previous}" value="#{bundle.Previous} #{alumnoController.pagination.pageSize}" rendered="#{alumnoController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{alumnoController.next}" value="#{bundle.Next} #{alumnoController.pagination.pageSize}" rendered="#{alumnoController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{alumnoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+        </ui:define>-->
+
+       <ui:define name="content">
+            <h:form id="AlumnoListForm">
+               <!--<p:panel header="#{bundle.ListAlumnoTitle}">-->
+                <p:dataTable id="datalist" value="#{alumnoController.items}" var="item"
+                                 selectionMode="single" selection="#{alumnoController.selected}"
+                                 paginator="true"
+                                 paginatorPosition="bottom"
+                                 rowKey="#{item.numeroCarne}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 widgetVar="tablaAlumnos"
+                                 
+                                 >
+                        
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.numeroCarne}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_numeroCarne}"/>
                             </f:facet>
                             <h:outputText value="#{item.numeroCarne}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column filterBy="#{item.nombre}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column filterBy="#{item.apellido}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column >
+                        <p:column filterBy="#{item.correo}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_correo}"/>
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column filterBy="#{item.telefono}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_telefono}"/>
                             </f:facet>
                             <h:outputText value="#{item.telefono}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column filterBy="#{item.direccion}" filterStyle="width:200px;" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_direccion}"/>
                             </f:facet>
                             <h:outputText value="#{item.direccion}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column >
+                        <p:column >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnoTitle_generoIdgenero}"/>
+                                <p:inputText id="globalFilter" onkeyup="PF('tablaAlumnos').filter()"
+                                             style="width: 200px;" placeholder="Busqueda General"/>
                             </f:facet>
-                            <h:outputText value="#{item.generoIdgenero}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{alumnoController.prepareView}" value="#{bundle.ListAlumnoViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{alumnoController.prepareEdit}" value="#{bundle.ListAlumnoEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{alumnoController.destroy}" value="#{bundle.ListAlumnoDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{alumnoController.prepareCreate}" value="#{bundle.ListAlumnoCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListAlumnoIndexLink}"/>
+                            <h:outputText value="#{item.generoIdgenero.descripcion}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" style="background-color: #33cc00; color: black;" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{alumnoController.prepareCreate}" update=":AlumnoCreateForm" oncomplete="PF('AlumnoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" style="display: none;"   icon="ui-icon-search" value="#{bundle.View}" update=":AlumnoViewForm" oncomplete="PF('AlumnoViewDialog').show()" disabled="#{empty alumnoController.selected}"/>
+                            <p:commandButton id="editButton" style="background-color: #ece3a5; color: black;"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AlumnoEditForm" oncomplete="PF('AlumnoEditDialog').show()" disabled="#{empty alumnoController.selected}"/>
+                            <p:commandButton id="deleteButton" style="background-color: #ff3333; color: black;" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{alumnoController.destroy}" update=":growl,datalist" disabled="#{empty alumnoController.selected}"/>
+                       
+                           
+                        </f:facet>
+                    </p:dataTable>
+                
+              <!-- </p:panel>-->
             </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
 

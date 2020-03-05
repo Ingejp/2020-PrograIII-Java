@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <title>Facelets Template</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        </link>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </h:head>
+
+    <h:body>
+        
+    <p:growl id="growl" life="3000" />
+    
+        <div id="encabezado">
+            <nav class="navbar navbar-expand-lg navbar-dark  bg-primary p-3 mb-5">
+            <a class="navbar-brand" href="../index.xhtml">Bienvenidos 
+                <i class="fas fa-home fa-1x"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item dropdown active" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Catálogos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <h:link outcome="/alumno/List" value="Alumnos" class="dropdown-item" />
+                       <h:link outcome="/genero/List" value="Genero" class="dropdown-item"/>
+                       <h:link outcome="/curso/List" value="Cursos" class="dropdown-item"/>
+                         <h:link outcome="/Vistas/PlantillaCliente" value="Plantilla" class="dropdown-item"/>
+                    </div>
+                  </li>
+                    
+                    <li class="nav-item dropdown active" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Inscripciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         <h:link outcome="/inscripcion/List" value="Inscripción" class="dropdown-item"/>
+                        <h:link outcome="/asignacionCurso/List" value="Asignacion de cursos" class="dropdown-item" />                      
+                    </div>
+                  </li>
+               </ul>
+            </div>
+          </nav>
+        </div>
+
+        <div id="content" class="center_content col-md-12">
+            <ui:insert name="content" >Content</ui:insert>
+        </div>
+
+       <!-- <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>-->
+
+    </h:body>
+
+</html>

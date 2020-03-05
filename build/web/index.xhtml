@@ -3,38 +3,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
+
         <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        </link>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <!--<h:outputStylesheet name="css/jsfcrud.css"/>-->
     </h:head>
     <h:body>
-        Hello from Progra III
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/alumno/List" value="Show All Alumno Items"/>
-        <br />
-        <h:link outcome="/genero/List" value="Show All Genero Items"/>
-        <br />
-        <h:link outcome="/alumno/List" value="Show All Alumno Items"/>
-        <br />
-        <h:link outcome="/asignacionCurso/List" value="Show All AsignacionCurso Items"/>
-        <br />
-        <h:link outcome="/curso/List" value="Show All Curso Items"/>
-        <br />
-        <h:link outcome="/genero/List" value="Show All Genero Items"/>
-        <br />
-        <h:link outcome="/inscripcion/List" value="Show All Inscripcion Items"/>
-        <br />
-        <h:link outcome="/alumno/List" value="Show All Alumno Items"/>
-        <br />
-        <h:link outcome="/asignacionCurso/List" value="Show All AsignacionCurso Items"/>
-        <br />
-        <h:link outcome="/curso/List" value="Show All Curso Items"/>
-        <br />
-        <h:link outcome="/genero/List" value="Show All Genero Items"/>
-        <br />
-        <h:link outcome="/inscripcion/List" value="Show All Inscripcion Items"/>
+                
+       <nav class="navbar navbar-expand-lg navbar-dark  bg-primary p-3 mb-5">
+            <a class="navbar-brand" href="#">Bienvenidos 
+                <i class="fas fa-home fa-1x"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item dropdown active" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Catálogos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <h:link outcome="/alumno/List" value="Alumnos" class="dropdown-item" />
+                       <h:link outcome="/genero/List" value="Genero" class="dropdown-item"/>
+                       <h:link outcome="/curso/List" value="Cursos" class="dropdown-item"/>
+                         <h:link outcome="/Vistas/PlantillaCliente" value="Plantilla" class="dropdown-item"/>
+                    </div>
+                  </li>
+                    
+                    <li class="nav-item dropdown active" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Inscripciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         <h:link outcome="/inscripcion/List" value="Inscripción" class="dropdown-item"/>
+                        <h:link outcome="/asignacionCurso/List" value="Asignacion de cursos" class="dropdown-item" />                      
+                    </div>
+                  </li>
+               </ul>
+            </div>
+          </nav>
+   
+    
     </h:body>
+
+
+
+
+
 
 
 

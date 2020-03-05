@@ -3,39 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateInscripcionTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateInscripcionLabel_idinscripcion}" for="idinscripcion" />
-                    <h:inputText id="idinscripcion" value="#{inscripcionController.selected.idinscripcion}" title="#{bundle.CreateInscripcionTitle_idinscripcion}" required="true" requiredMessage="#{bundle.CreateInscripcionRequiredMessage_idinscripcion}"/>
-                    <h:outputLabel value="#{bundle.CreateInscripcionLabel_fechaInscripcion}" for="fechaInscripcion" />
-                    <h:inputText id="fechaInscripcion" value="#{inscripcionController.selected.fechaInscripcion}" title="#{bundle.CreateInscripcionTitle_fechaInscripcion}" required="true" requiredMessage="#{bundle.CreateInscripcionRequiredMessage_fechaInscripcion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateInscripcionLabel_alumnonumerocarne}" for="alumnonumerocarne" />
-                    <h:selectOneMenu id="alumnonumerocarne" value="#{inscripcionController.selected.alumnonumerocarne}" title="#{bundle.CreateInscripcionTitle_alumnonumerocarne}" required="true" requiredMessage="#{bundle.CreateInscripcionRequiredMessage_alumnonumerocarne}">
-                        <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{inscripcionController.create}" value="#{bundle.CreateInscripcionSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{inscripcionController.prepareList}" value="#{bundle.CreateInscripcionShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateInscripcionIndexLink}"/>
+    <ui:composition>
+
+        <p:dialog id="InscripcionCreateDlg" widgetVar="InscripcionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInscripcionTitle}">
+            <h:form id="InscripcionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscripcionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_idinscripcion}" for="idinscripcion" />
+                        <p:inputText id="idinscripcion" value="#{inscripcionController.selected.idinscripcion}" title="#{bundle.CreateInscripcionTitle_idinscripcion}" required="true" requiredMessage="#{bundle.CreateInscripcionRequiredMessage_idinscripcion}"/>
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_fechaInscripcion}" for="fechaInscripcion" />
+                        <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy" value="#{inscripcionController.selected.fechaInscripcion}" title="#{bundle.EditInscripcionTitle_fechaInscripcion}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_fechaInscripcion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_alumnonumerocarne}" for="alumnonumerocarne" />
+                        <p:selectOneMenu id="alumnonumerocarne" value="#{inscripcionController.selected.alumnonumerocarne}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_alumnonumerocarne}">
+                            <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"
+                                           var="alumnonumerocarneItem"
+                                           itemValue="#{alumnonumerocarneItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inscripcionController.create}" value="#{bundle.Save}" update="display,:InscripcionListForm:datalist,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InscripcionCreateDialog.hide()"/>
+                </h:panelGroup>
             </h:form>
-        </ui:define>
-    </ui:composition>
+        </p:dialog>
 
+    </ui:composition>
 </html>
